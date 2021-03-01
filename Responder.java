@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 /**
  * The responder class represents a response generator object.
  * It is used to generate an automatic response to an input string.
@@ -32,22 +33,36 @@ public class Responder
         hashInput.put("deficient", "Oh don´t worry I can solve it");
         hashInput.put("español", "Vale, mejor hablamos en español");
         hashInput.put("pandemia", "Eso a mi no me repercute");
-        hashInput.put("KFC", "llama al 900 711 117");
+        hashInput.put("kfc", "llama al 900 711 117");
     }
 
     /**
      * Generate a response.
      * @return   A string that should be displayed as the response
      */
-    public String generateResponse(String userInput)
+    public String generateResponse(HashSet<String> userInput)
     {
-        String resultado;
+        String respuestaFinal = null;
+        boolean buscando = true;
+        for(String elemento : userInput){
+            if(buscando){
+                if(hashInput.containsKey(elemento)){
+                    respuestaFinal = hashInput.get(elemento);
+                    buscando = false;
+                }
+                else{
+                    respuestaFinal = respuestas.get(azar.nextInt(respuestas.size()));
+                }
+            }
+        }
+        return respuestaFinal;
+        /*
         if(hashInput.get(userInput) == null){
             resultado = respuestas.get(azar.nextInt(respuestas.size()));
         } 
         else {
             resultado = hashInput.get(userInput); 
         }
-        return resultado;   
+        */
     }
 }
