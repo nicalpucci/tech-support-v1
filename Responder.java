@@ -43,26 +43,24 @@ public class Responder
     public String generateResponse(HashSet<String> userInput)
     {
         String respuestaFinal = null;
-        boolean buscando = true;
+        boolean respuestaAleatoria = true;
         for(String elemento : userInput){
-            if(buscando){
-                if(hashInput.containsKey(elemento)){
-                    respuestaFinal = hashInput.get(elemento);
-                    buscando = false;
-                }
-                else{
-                    respuestaFinal = respuestas.get(azar.nextInt(respuestas.size()));
-                }
+            if(hashInput.containsKey(elemento)){
+                respuestaFinal = hashInput.get(elemento);
+                respuestaAleatoria = false;
             }
         }
+        if(respuestaAleatoria){
+            respuestaFinal = respuestas.get(azar.nextInt(respuestas.size()));
+        }    
         return respuestaFinal;
         /*
         if(hashInput.get(userInput) == null){
-            resultado = respuestas.get(azar.nextInt(respuestas.size()));
+        resultado = respuestas.get(azar.nextInt(respuestas.size()));
         } 
         else {
-            resultado = hashInput.get(userInput); 
+        resultado = hashInput.get(userInput); 
         }
-        */
+         */
     }
 }
