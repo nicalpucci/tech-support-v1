@@ -17,6 +17,7 @@ public class Responder
     private HashSet <String> conjunto = new HashSet <String>();
     private HashSet <String> conjunto2 = new HashSet <String>();
     private HashSet <String> conjunto3 = new HashSet <String>();
+    private String respuestaAnterior;
     /**
      * Construct a Responder - nothing to do
      */
@@ -64,12 +65,13 @@ public class Responder
             }
             if(i > iGlobal){
                 iGlobal = i;
-                respuestaFinal = hashInput.get(claveActual);
-            }
+                respuestaFinal = hashInput.get(claveActual);      
+            }            
         }  
-        if(respuestaFinal == null){
+        if(respuestaFinal == respuestaAnterior){
             respuestaFinal = respuestas.get(azar.nextInt(respuestas.size()));
-        }    
+        }
+        respuestaAnterior = respuestaFinal;
         return respuestaFinal;
     }
 }
