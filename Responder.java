@@ -36,13 +36,13 @@ public class Responder
         respuestas.add("Nice joke");
         conjunto.add("free");
         conjunto.add("app");
-        conjunto2.add("kfc");
-        conjunto2.add("español");
+        conjunto2.add("corrupt");
+        conjunto2.add("windows");
+        conjunto2.add("problem");
         conjunto3.add("crash");
         conjunto3.add("linux");
         conjunto3.add("problem");
         hashInput.put(conjunto, "You can download our app in Play Store -not App Store- for free!");
-        hashInput.put(conjunto2, "Vale, mejor hablamos en español");
         hashInput.put(conjunto3, "Perhaps... did you drop your computer?");
         hashInput.put(conjunto2, "llama al 900 711 117");        
     }
@@ -53,27 +53,23 @@ public class Responder
      */
     public String generateResponse(HashSet<String> userInput)
     {
-        String respuestaFinal = hashInput.get(userInput);
+        String respuestaFinal = null;        
+        int iGlobal = 0;
+        for(HashSet<String> claveActual : hashInput.keySet()){
+            int i = 0;
+            for(String palabraUsuarioActual : userInput){            
+                if(claveActual.contains(palabraUsuarioActual)){
+                    i++;                    
+                }
+            }
+            if(i > iGlobal){
+                iGlobal = i;
+                respuestaFinal = hashInput.get(claveActual);
+            }
+        }  
         if(respuestaFinal == null){
             respuestaFinal = respuestas.get(azar.nextInt(respuestas.size()));
         }    
         return respuestaFinal;
-
-        /*for(HashSet<String> claveActual : hashInput.keySet()){
-        for(String palabraUsuarioActual : userInput){
-        if(palabraUsuarioActual.equals(claveActual)){
-        respuestaFinal = hashInput.get(palabraUsuarioActual);
-        respuestaAleatoria = false;
-        }
-        }
-        if(hashInput.containsKey(claveActual)){
-        respuestaFinal = hashInput.get(claveActual);
-        respuestaAleatoria = false;
-        }
-        }
-        if(respuestaAleatoria){
-        respuestaFinal = respuestas.get(azar.nextInt(respuestas.size()));
-        }    
-        return respuestaFinal;*/
     }
 }
