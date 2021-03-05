@@ -68,7 +68,7 @@ public class Responder
                 respuestaFinal = hashInput.get(claveActual);      
             }            
         }  
-        if(respuestaFinal == respuestaAnterior){
+        if(respuestaFinal == respuestaAnterior && respuestaFinal == null){
             respuestaFinal = respuestas.get(azar.nextInt(respuestas.size()));
         }
         respuestaAnterior = respuestaFinal;
